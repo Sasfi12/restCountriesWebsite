@@ -2,16 +2,27 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 export default function Country({data}) {
-  const idd = useParams() 
-  console.log(idd)
-  
-
+  const { cca3 } = useParams();
+  const selected = data.find((e) => e.cca3 === cca3);
+ 
   useEffect(() => {
-    console.log(`selected is defined as ${selected} !`)
-  } , [selected])
+    console.log("Selected is defined as:", selected);
+  }, [selected]);
+
   return ( 
-      <h2>
-        
-      </h2>
+    selected ?  
+      <div>
+        <div className="one-card-container" >
+                    <img src={selected.flags.png} alt="" />
+                <br />
+                Name : {selected.name.official}
+                <br />   
+                Capital : {selected.capital} 
+                <br />
+                Population : {selected.population}
+                <br />
+                Region : {selected.region}
+            </div>
+      </div> : ""
     )
 }

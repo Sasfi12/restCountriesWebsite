@@ -4,14 +4,14 @@ import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
 import Countries from './components/countries/Countries';
 import Country from './components/country/Country';
 function App() {
-  const [data , setData] = useState(null);
+  const [data , setData] = useState([]);
   const [loading , setLoading] = useState(true);
   const [error , setError] = useState(null) ; 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
     .then((response) => response.json())
     .then((response) => { setData(response); setLoading(false) ;  })
-    .catch((error) => error)
+    .catch((error) => setError(error) , setLoading(false))
   }, [])
   if(loading) 
     return ( 
@@ -26,7 +26,7 @@ function App() {
     <Router>
         <Routes>
           <Route path={"/"} element={<Countries informations={data}/>} />
-          <Route path={"/:idd"} element={<Country data={data} />}/>
+          <Route path={"/:cca3"} element={<Country data={data} />}/>
         </Routes>
     </Router>
     

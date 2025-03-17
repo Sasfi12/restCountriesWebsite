@@ -1,13 +1,14 @@
 import {Link} from "react-router-dom"
-export default function Countries({informations , showCard}) {
+export default function Countries({informations}) {
+    console.log()
     return (
         <div>
             <h2>HELLO</h2>
         {informations.map((e , index) => {
             return (
             <div key={index} className="card-container" >
-                <Link to={e.idd.root}>
-                <img src={e.flags.png} alt="" />
+                <Link to={e.cca3}>
+                    <img src={e.flags.png} alt="" />
                 </Link>
                 <br />
                 Name : {e.name.official}
