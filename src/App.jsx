@@ -5,6 +5,7 @@ import Countries from './components/countries/Countries';
 import Country from './components/country/Country';
 function App() {
   const [data , setData] = useState([]);
+  const [display , setDisplay] = useState([]);
   const [loading , setLoading] = useState(true);
   const [error , setError] = useState(null) ; 
   useEffect(() => {
@@ -13,6 +14,11 @@ function App() {
     .then((response) => { setData(response); setLoading(false) ;  })
     .catch((error) => setError(error) , setLoading(false))
   }, [])
+  const filterFunction = (e) => {
+    if(e.target.value !== "") {
+    setDisplay(data.filter((element) => element.name.official.toLowerCase().includes(e.target.value.toLowerCase()) ))
+   }
+  }
   if(loading) 
     return ( 
       <h1>Loading...</h1> 
@@ -25,7 +31,7 @@ function App() {
     <>
     <Router>
         <Routes>
-          <Route path={"/"} element={<Countries informations={data}/>} />
+          <Route path={"/"} element={<Countries informations={display} filterFunction={filterFunction}/>} />
           <Route path={"/:cca3"} element={<Country data={data} />}/>
         </Routes>
     </Router>

@@ -1,13 +1,8 @@
-import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 export default function Country({data}) {
   const { cca3 } = useParams();
   const selected = data.find((e) => e.cca3 === cca3);
- 
-  useEffect(() => {
-    console.log("Selected is defined as:", selected);
-  }, [selected]);
 
   return ( 
     selected ?  
@@ -23,6 +18,6 @@ export default function Country({data}) {
                 <br />
                 Region : {selected.region}
             </div>
-      </div> : ""
+      </div> : "Loading... "
     )
 }

@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom"
-export default function Countries({informations}) {
+export default function Countries({informations , filterFunction}) {
     console.log()
     return (
         <div>
             <h2>HELLO</h2>
+            <input type="text" onChange={filterFunction}/>
         {informations.map((e , index) => {
             return (
             <div key={index} className="card-container" >
